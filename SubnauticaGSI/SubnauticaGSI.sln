@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubnauticaGSI", "SubnauticaGSI\SubnauticaGSI.csproj", "{EB147EB9-CC24-4E0A-B057-356237B9CF60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubnauticaGSI", "SubnauticaGSI\SubnauticaGSI.csproj", "{EF711068-AB8D-4A96-A584-EA6C27393320}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EB147EB9-CC24-4E0A-B057-356237B9CF60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB147EB9-CC24-4E0A-B057-356237B9CF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB147EB9-CC24-4E0A-B057-356237B9CF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB147EB9-CC24-4E0A-B057-356237B9CF60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF711068-AB8D-4A96-A584-EA6C27393320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF711068-AB8D-4A96-A584-EA6C27393320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF711068-AB8D-4A96-A584-EA6C27393320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF711068-AB8D-4A96-A584-EA6C27393320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3662999D-C47F-4FF8-A65A-BA1020A5AEDA}
+		SolutionGuid = {69CA297A-6B47-4193-B1E5-0B4FDD6E7858}
 	EndGlobalSection
 EndGlobal

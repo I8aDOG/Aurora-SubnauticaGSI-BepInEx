@@ -1,4 +1,6 @@
-﻿using Oculus.Newtonsoft.Json;
+﻿using BepInEx;
+using HarmonyLib;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
@@ -15,9 +17,12 @@ namespace SubnauticaGSI
         Playing
     }
 
-    public class AuroraController : MonoBehaviour
+    [BepInPlugin(pluginGUID, pluginName, pluginVersion)]
+    public class Plugin : BaseUnityPlugin
     {
-        private static GameObject controllerGO;
+        private const string pluginGUID = "guid";
+        private const string pluginName = "SubnauticaGSI";
+        private const string pluginVersion = "1.0.0";
 
         public static PlayerState state;
 
@@ -25,40 +30,40 @@ namespace SubnauticaGSI
 
         private string jsonlast;
 
-        public static void Load()
+        private void Start()
         {
-            controllerGO = new GameObject("AuroraController");
-            controllerGO.AddComponent<AuroraController>();
-            controllerGO.AddComponent<SceneCleanerPreserve>();
-            DontDestroyOnLoad(controllerGO);
-
             SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+
+            // Prevent SceneCleaner from deleting the mod.
+            gameObject.AddComponent<SceneCleanerPreserve>();
         }
 
-        private static void SceneManager_sceneLoaded(Scene scene, LoadSceneMode arg1)
+        private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode arg1)
         {
             currentSceneName = scene.name;
-            Console.WriteLine("Loaded Scene: " + currentSceneName);
-
+            
             if (currentSceneName.ToLower().Contains("menu"))
-                state = PlayerState.Menu;
-            if (controllerGO == null)
             {
-                controllerGO = new GameObject("AuroraController").AddComponent<AuroraController>().gameObject;
+                state = PlayerState.Menu;
+                SerializeJson();
             }
         }
 
-        public void Update()
+        private void Update()
         {
+            if (currentSceneName == null) return;
+
             UpdateState();
             SerializeJson();
         }
 
         private void UpdateState()
         {
+            PlayerState newstate = state;
+
             if (currentSceneName.ToLower().Contains("menu"))
                 state = PlayerState.Menu;
-            else if (!uGUI_SceneLoading.IsLoadingScreenFinished || uGUI.main.loading.IsLoading || !uGUI.main)
+            else if (WaitScreen.IsWaiting)
                 state = PlayerState.Loading;
             else
                 state = PlayerState.Playing;
@@ -82,24 +87,22 @@ namespace SubnauticaGSI
             {
                 try
                 {
-                    //string json = "{\"user\":\"test\"," +
-                    //  "\"password\":\"bla\"}";
                     int AuroraPort = 9088;
                     var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:" + AuroraPort);
                     httpWebRequest.ContentType = "application/json";
                     httpWebRequest.Method = "POST";
-    
+
                     using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                     {
                         streamWriter.Write(json);
                         streamWriter.Flush();
                         streamWriter.Close();
                     }
-    
+
                     var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
-                       var result = streamReader.ReadToEnd();
+                        var result = streamReader.ReadToEnd();
                     }
                 }
                 catch (InvalidCastException e) //ignore Server issues (Aurora closed)
@@ -107,6 +110,5 @@ namespace SubnauticaGSI
                 }
             }).Start();
         }
-
     }
 }

@@ -21,7 +21,7 @@ namespace SubnauticaGSI
 
         public GameStateNode()
         {
-            this.game_state = AuroraController.state;
+            this.game_state = Plugin.state;
         }
     }
 
@@ -66,8 +66,8 @@ namespace SubnauticaGSI
             else if (Vehicle)
                 type = Vehicle.GetType().Equals(typeof(SeaMoth)) ? "Seamoth" : "Prawn";
 
-                //this.depth = Mathf.RoundToInt(Player.main.GetDepth());
-                //this.surface_depth = Mathf.RoundToInt(Player.main.GetSurfaceDepth());
+            //this.depth = Mathf.RoundToInt(Player.main.GetDepth());
+            //this.surface_depth = Mathf.RoundToInt(Player.main.GetSurfaceDepth());
             this.depth_level = Mathf.RoundToInt(Player.main.depthLevel);
 
             this.health = Mathf.RoundToInt(Player.main.liveMixin.health);
@@ -86,7 +86,7 @@ namespace SubnauticaGSI
 
             this.motor_mode = Player.main.motorMode;
             this.mode = Player.main.GetMode();
-            
+
         }
     }
 
@@ -144,7 +144,7 @@ namespace SubnauticaGSI
             this.game_state = new GameStateNode();
 
             //only get PlayerInfo when InGame
-            if (AuroraController.state == PlayerState.Playing)
+            if (Plugin.state == PlayerState.Playing)
             {
                 //will fail when not in Game 
                 try
