@@ -20,7 +20,7 @@ namespace SubnauticaGSI
     [BepInPlugin(pluginGUID, pluginName, pluginVersion)]
     public class Plugin : BaseUnityPlugin
     {
-        private const string pluginGUID = "guid";
+        private const string pluginGUID = "com.notcasey.SubnauticaGSI";
         private const string pluginName = "SubnauticaGSI";
         private const string pluginVersion = "1.0.0";
 
